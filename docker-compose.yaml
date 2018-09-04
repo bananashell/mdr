@@ -2,10 +2,17 @@ version: '3'
 services:
   database:
     image: mongo:latest
-  # webapp:
-  #   build: ./server
-  #    environment:
-  #      - Cache:Url=cache
-  #      - DB:Url=database
+  webapp:
+    build: ./server/src
+    image: mdr/webapp
+    ports:
+      - 5000:5000
+      - 5001:5001
+    volumes:
+      - c:/localcode/mdr/server/src:/code/src
+    environment:
+      - Cache:Url=cache
+      - DB:Url=database
   cache:
     image: redis:latest
+

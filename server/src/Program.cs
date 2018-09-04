@@ -20,6 +20,8 @@ namespace mdr.Server
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseKestrel()
+                .UseUrls("http://0.0.0.0:5000", "https://0.0.0.0:5001")
+                .UseWebRoot("wwwroot")
                 .UseStartup<Startup>();
     }
 }

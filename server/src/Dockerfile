@@ -12,5 +12,10 @@ COPY Directory.Build.props .
 
 RUN dotnet restore
 
+COPY . .
+
+EXPOSE 5000
+EXPOSE 5001
+
 # This will build and launch the server in a loop, restarting whenever a *.cs file changes
-ENTRYPOINT dotnet watch run --no-restore
+ENTRYPOINT dotnet run --no-restore

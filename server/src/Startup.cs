@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.ResponseCompression;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore;
 using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
 
 namespace mdr.Server
 {
@@ -71,8 +73,25 @@ namespace mdr.Server
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Swagger mdr Api");
             });
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseHttpsRedirection();
             app.UseMvc();
+            app.UseSpa(config => {
+               
+            });
+            // app.MapWhen(context => !Path.HasExtension(context.Request.Path.Value),
+            //             branch =>
+            //             {
+            //                 branch.Use((context, next) =>
+            //                 {
+            //                     context.Request.Path = new PathString(Path.Combine(env.WebRootPath, "index.html");
+            //                     return next();
+            //                 });
+
+            //                 branch.UseStaticFiles();
+            //             });
         }
     }
 }
