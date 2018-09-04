@@ -4,5 +4,8 @@ services:
     image: mongo:latest
   # webapp:
   #   build: ./server
+  #    environment:
+  #      - Cache:Url=cache
+  #      - DB:Url=database
   cache:
     image: redis:latest
